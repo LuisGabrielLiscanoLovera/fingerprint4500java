@@ -203,8 +203,8 @@ public class ConsoleUserInterfaceFactory implements UserInterface.Factory {
             //mainMenu.add(new MenuItem("Seleccione una tarjeta", MAIN_MENU_SELECT));
             //mainMenu.add(new MenuItem("Agragar una persona a la db ", MAIN_MENU_ADD));
 
-            mainMenu.add(new MenuItem("Registrar huella (enrollment)", MAIN_MENU_ENROLL));
-            mainMenu.add(new MenuItem("Verificacion", MAIN_MENU_VERIFY));
+            //mainMenu.add(new MenuItem("Registrar huella (enrollment)", MAIN_MENU_ENROLL));
+            //mainMenu.add(new MenuItem("Verificacion", MAIN_MENU_VERIFY));
         }
 
         private static final EnumMap<DPFPFingerIndex, String> fingerNames;
@@ -238,16 +238,14 @@ public class ConsoleUserInterfaceFactory implements UserInterface.Factory {
                 StringBuilder sb = new StringBuilder();
                 sb.append(String.format("Elige una opccion (1 - %d", menu.size()));
                 if ((nMenuFlags & MENU_WITH_BACK) != 0) {
-                    System.out.printf("\nR: %s\n\n", backItem.getText());
                     sb.append(", R");
                 }
                 if ((nMenuFlags & MENU_WITH_EXIT) != 0) {
-                    System.out.printf("\nE: %s\n\n", exitItem.getText());
                     sb.append(", E");
                 }
                 sb.append("): ");
 
-                String userInput = ShowDialog(sb.toString());
+                String userInput ="E";// ShowDialog(sb.toString());
 
 
 
@@ -568,6 +566,10 @@ public class ConsoleUserInterfaceFactory implements UserInterface.Factory {
                                 DPFPVerificationResult result = matcher.verify(featureSet, templater);
                                 
                                 if (result.isVerified()) {
+                                    
+                         
+        
+        
                                     System.out.printf("Verificacion exitosa!!! \n PROBABILITY_ONE far achieved:  %g.\n",
                                              (double)result.getFalseAcceptRate()/DPFPVerification.PROBABILITY_ONE);
                                     return;
@@ -664,6 +666,7 @@ public class ConsoleUserInterfaceFactory implements UserInterface.Factory {
                     lastStatus = e.getReaderStatus();
                 }
                 public void readerDisconnected(DPFPReaderStatusEvent e) {
+                    
                     if (lastStatus != e.getReaderStatus())
                         System.out.println("Reader is disconnected");
                     lastStatus = e.getReaderStatus();
